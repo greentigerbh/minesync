@@ -51,13 +51,13 @@ export default function ScenarioControls({
   };
 
   return (
-    <div className="bg-slate-900 border-b border-slate-800 px-4 py-3">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+    <div className="bg-slate-900/95 border-b border-slate-800 px-3 sm:px-4 py-3">
+      <div className="flex flex-col xl:flex-row xl:flex-wrap items-stretch xl:items-center justify-between gap-3 xl:gap-4">
         {/* Scenario Selector */}
-        <div className="flex items-center space-x-3 flex-1 min-w-[320px]">
-          <div className="flex items-center space-x-2 text-cyan-400 font-semibold text-xs shrink-0 uppercase tracking-wider">
+        <div className="flex items-center space-x-3 flex-1 min-w-0 w-full xl:w-auto">
+          <div className="scenario-label flex items-center space-x-2 text-cyan-400 font-semibold text-xs shrink-0 uppercase tracking-wider">
             <Zap className="w-4 h-4 text-cyan-400" />
-            <span>Simulation Scenario:</span>
+            <span className="hidden sm:inline">Simulation Scenario:</span><span className="sm:hidden">Scenario</span>
           </div>
           <select
             value={currentScenarioId}
@@ -73,7 +73,7 @@ export default function ScenarioControls({
         </div>
 
         {/* Playback Controls */}
-        <div className="flex items-center space-x-2 bg-slate-950 border border-slate-800 rounded-lg p-1">
+        <div className="flex items-center justify-between space-x-2 bg-slate-950 border border-slate-800 rounded-lg p-1 w-full xl:w-auto">
           {/* Play/Pause */}
           <button
             onClick={onTogglePlay}
@@ -136,20 +136,20 @@ export default function ScenarioControls({
         </div>
 
         {/* Step Progress Slider Bar */}
-        <div className="flex items-center space-x-3 text-xs text-slate-400 min-w-[200px]">
+        <div className="flex items-center space-x-3 text-xs text-slate-400 min-w-0 w-full xl:w-auto">
           <span className="font-mono text-slate-300 font-semibold shrink-0">
             Step {currentStep} / {maxSteps}
           </span>
-          <div className="w-32 bg-slate-800 h-2 rounded-full overflow-hidden shrink-0">
+          <div className="flex-1 max-w-xs bg-slate-800 h-2 rounded-full overflow-hidden shrink-0">
             <div
-              className="bg-gradient-to-r from-cyan-500 to-blue-600 h-full transition-all duration-300"
+              className="bg-linear-to-r from-cyan-500 to-blue-600 h-full transition-all duration-300"
               style={{ width: `${(currentStep / maxSteps) * 100}%` }}
             ></div>
           </div>
         </div>
 
         {/* Action Buttons: Hardware MQTT Bridge & Manual Anomaly Injector */}
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 w-full xl:w-auto">
           {/* Hardware MQTT Bridge Simulator Toggle */}
           <button
             onClick={onToggleMqttBridge}
@@ -161,7 +161,8 @@ export default function ScenarioControls({
             title="Toggle Simulated Physical ESP32 LoRa MQTT Gateway Payload Stream"
           >
             <Radio className={`w-3.5 h-3.5 ${isMqttBridgeActive ? 'text-cyan-400 animate-pulse' : 'text-slate-500'}`} />
-            <span>{isMqttBridgeActive ? 'ESP32 MQTT Stream: ON' : 'ESP32 MQTT Stream: OFF'}</span>
+            <span className="hidden sm:inline">{isMqttBridgeActive ? 'ESP32 MQTT Stream: ON' : 'ESP32 MQTT Stream: OFF'}</span>
+            <span className="sm:hidden">MQTT {isMqttBridgeActive ? 'ON' : 'OFF'}</span>
           </button>
 
           {/* Manual Anomaly Trigger Modal Button */}
@@ -170,7 +171,7 @@ export default function ScenarioControls({
             className="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium border border-slate-700 flex items-center space-x-1.5 transition-all"
           >
             <SlidersHorizontal className="w-3.5 h-3.5 text-amber-400" />
-            <span>Inject Custom Anomaly</span>
+            <span className="hidden sm:inline">Inject Custom Anomaly</span><span className="sm:hidden">Inject</span>
           </button>
         </div>
       </div>
@@ -194,6 +195,7 @@ export default function ScenarioControls({
               </div>
               <button
                 onClick={() => setShowManualModal(false)}
+                aria-label="Close anomaly injector"
                 className="text-slate-400 hover:text-white text-lg font-bold"
               >
                 &times;

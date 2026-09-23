@@ -44,7 +44,7 @@ export default function Header({
       <div className="bg-gradient-to-r from-[#06080f] via-[#0a1628] to-[#06080f] border-b border-cyan-900/40 px-4 py-1.5 flex items-center justify-between text-[11px] text-slate-400">
         <div className="flex items-center space-x-2">
           <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse inline-block shrink-0" />
-          <span>
+            <span className="hidden sm:inline">
             <strong className="text-cyan-400">Mine Sync Positioning:</strong>{' '}
             Continuous low-cost distributed sensing &amp; edge AI early-warning layer — supplementing GNSS, InSAR &amp; periodic mine surveying.
           </span>
@@ -90,7 +90,7 @@ export default function Header({
         </div>
 
         {/* Status strip */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
           {/* Risk score card */}
           <div className={`flex items-center space-x-2.5 px-3 py-2 rounded-xl border ${cfg.bg} ${cfg.border} ${cfg.glow}`}>
             {cfg.icon}
@@ -136,6 +136,7 @@ export default function Header({
           {/* Report button */}
           <button
             onClick={onOpenReportModal}
+            aria-label="Open geotechnical incident report"
             className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold text-xs shadow-lg shadow-cyan-900/40 border border-cyan-400/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
           >
             <FileText className="w-3.5 h-3.5" />

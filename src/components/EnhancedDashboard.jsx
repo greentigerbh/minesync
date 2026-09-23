@@ -26,7 +26,7 @@ const STATUS_COLORS = {
   OFFLINE: '#64748b'
 };
 
-export default function EnhancedDashboard({ nodes, riskAnalysis, selectedNodeId, onSelectNode }) {
+export default function EnhancedDashboard({ nodes, riskAnalysis, selectedNodeId, onSelectNode, compact = false }) {
   const [showDetails, setShowDetails] = useState(false);
 
   const statusCounts = useMemo(() => {
@@ -50,8 +50,8 @@ export default function EnhancedDashboard({ nodes, riskAnalysis, selectedNodeId,
   const criticalNodes = useMemo(() => 
     nodes.filter(n => n.status === 'HIGH_RISK' || n.status === 'ANOMALOUS').length, [nodes]);
 
-  const totalDisplacement = useMemo(() => 
-    nodes.reduce((sum, n) => sum + (n.displacement || 0), 0).toFixed(1), [nodes]);
+  const maxDisplacement = useMemo(() =>
+    Math.max(...nodes.map(n => n.displacement || 0), 0).toFixed(1), [nodes]);
 
   const avgBattery = useMemo(() => 
     (nodes.reduce((sum, n) => sum + (n.batteryV || 3.9), 0) / nodes.length).toFixed(2), [nodes]);
@@ -106,13 +106,13 @@ export default function EnhancedDashboard({ nodes, riskAnalysis, selectedNodeId,
           <div className="flex items-center justify-between">
             <div>
               <p className="text-[10px] text-slate-400 uppercase tracking-wider">Max Displacement</p>
-              <p className="text-2xl font-black font-mono text-amber-400">{totalDisplacement} mm</p>
+              <p className="text-2xl font-black font-mono text-amber-400">{maxDisplacement} mm</p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
               <TrendingUp className="w-6 h-6 text-amber-400" />
             </div>
           </div>
-          <div className="mt-2 text-[11px] text-slate-400">Cumulative across all nodes</div>
+          <div className="mt-2 text-[11px] text-slate-400">Peak reading across all nodes</div>
         </GlassPanel>
 
         <GlassPanel className="p-4 border-emerald-500/30 bg-emerald-950/20">
@@ -142,6 +142,7 @@ export default function EnhancedDashboard({ nodes, riskAnalysis, selectedNodeId,
         </GlassPanel>
       </div>
 
+      {!compact && <>
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Node Status Distribution - Pie Chart */}
@@ -317,6 +318,15 @@ export default function EnhancedDashboard({ nodes, riskAnalysis, selectedNodeId,
               <div
                 key={node.id}
                 onClick={() => onSelectNode(node.id)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    onSelectNode(node.id);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Inspect ${node.name}, status ${status}`}
                 className={`p-3 rounded-lg border cursor-pointer transition-all duration-200 relative overflow-hidden ${
                   isSelected
                     ? 'bg-cyan-950/70 border-cyan-500 ring-2 ring-cyan-500/50 shadow-lg scale-[1.02]'
@@ -389,6 +399,7 @@ export default function EnhancedDashboard({ nodes, riskAnalysis, selectedNodeId,
           })}
         </div>
       </GlassPanel>
+      </>}
     </div>
   );
 }

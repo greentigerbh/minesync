@@ -97,9 +97,9 @@ export default function GisMap({
   const spatialLinks = riskAnalysis ? riskAnalysis.spatialLinks : [];
 
   return (
-    <div className="relative w-full h-[540px] rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950">
+    <div className="relative w-full h-[min(68vw,540px)] min-h-[360px] max-h-[540px] rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950">
       {/* Map Header Controls overlay */}
-      <div className="absolute top-3 left-3 z-[400] flex items-center space-x-2 bg-slate-900/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-800 text-xs shadow-lg">
+      <div className="absolute top-3 left-3 z-400 flex items-center space-x-2 bg-slate-900/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-800 text-xs shadow-lg">
         <div className="flex items-center space-x-1.5 text-cyan-400 font-semibold">
           <Crosshair className="w-4 h-4 text-cyan-400" />
           <span>GIS Surface & Underground Command Map</span>
@@ -111,7 +111,7 @@ export default function GisMap({
       </div>
 
       {/* Layer Toggle Menu Button */}
-      <div className="absolute top-3 right-3 z-[400]">
+      <div className="absolute top-3 right-3 z-400">
         <button
           onClick={() => setShowLayerMenu(!showLayerMenu)}
           className="bg-slate-900/90 hover:bg-slate-800 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 text-xs font-medium flex items-center space-x-1.5 backdrop-blur-md shadow-lg"
@@ -144,7 +144,7 @@ export default function GisMap({
       </div>
 
       {/* Map Legend Footer overlay */}
-      <div className="absolute bottom-3 left-3 z-[400] bg-slate-900/90 backdrop-blur-md px-3 py-2 rounded-lg border border-slate-800 text-[11px] space-y-1 text-slate-300 shadow-lg">
+      <div className="absolute bottom-3 left-3 z-400 bg-slate-900/90 backdrop-blur-md px-3 py-2 rounded-lg border border-slate-800 text-[11px] space-y-1 text-slate-300 shadow-lg">
         <div className="font-semibold text-slate-400 uppercase tracking-wider text-[10px]">Sensor Node Status Legend</div>
         <div className="flex items-center space-x-3 text-[10px]">
           <span className="flex items-center space-x-1">

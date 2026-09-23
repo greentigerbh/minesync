@@ -18,8 +18,8 @@ export default function NodeInspectorModal({ node, onClose }) {
   const tiltMag = Math.sqrt(node.tiltX ** 2 + node.tiltY ** 2);
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-2xl w-full shadow-2xl space-y-5 animate-in fade-in zoom-in duration-200">
+    <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4" role="presentation">
+      <div className="bg-slate-900 border border-slate-700 rounded-2xl p-4 sm:p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl space-y-5 animate-in fade-in zoom-in duration-200" role="dialog" aria-modal="true" aria-labelledby="node-inspector-title">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-800 pb-4">
           <div className="flex items-center space-x-3">
@@ -28,7 +28,7 @@ export default function NodeInspectorModal({ node, onClose }) {
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <h2 className="font-bold text-lg text-slate-100">{node.name}</h2>
+                <h2 id="node-inspector-title" className="font-bold text-lg text-slate-100">{node.name}</h2>
                 <span className={`px-2 py-0.5 text-[10px] font-bold rounded border ${
                   node.status === 'HIGH_RISK' ? 'bg-red-950 text-red-300 border-red-800' :
                   node.status === 'ANOMALOUS' ? 'bg-orange-950 text-orange-300 border-orange-800' :
@@ -46,6 +46,7 @@ export default function NodeInspectorModal({ node, onClose }) {
 
           <button
             onClick={onClose}
+            aria-label="Close node inspector"
             className="p-2 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition-all"
           >
             <X className="w-5 h-5" />
