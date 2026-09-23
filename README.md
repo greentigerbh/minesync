@@ -249,21 +249,23 @@ The geospatial layer can represent:
 
 <img width="381" height="441" alt="image" src="https://github.com/user-attachments/assets/efdb49bd-33bf-4ae0-acf6-ce6ce2fa1d12" />
 
-🧩 Technology Stack
-Category	Technology
-Programming	Python
-Frontend	HTML, JavaScript
-Styling	Tailwind CSS
-Edge Computing	Raspberry Pi 4
-Microcontroller	ESP32
-Motion Sensing	MPU6050
-Camera	USB / Raspberry Pi Camera
-Computer Vision	OpenCV / compatible CV stack
-AI/ML	ML/CV inference
-Cloud	AWS
-Object Storage	Amazon S3
-Communication	REST APIs
-Data Format	JSON
+🧩 Technology Stack| Category        | Technology                   |
+| --------------- | ---------------------------- |
+| Programming     | Python                       |
+| Frontend        | HTML, JavaScript             |
+| Styling         | Tailwind CSS                 |
+| Edge Computing  | Raspberry Pi 4               |
+| Microcontroller | ESP32                        |
+| Motion Sensing  | MPU6050                      |
+| Camera          | USB / Raspberry Pi Camera    |
+| Computer Vision | OpenCV / compatible CV stack |
+| AI/ML           | ML/CV inference              |
+| Cloud           | AWS                          |
+| Object Storage  | Amazon S3                    |
+| Communication   | REST APIs                    |
+| Data Format     | JSON                         |
+
+
 🔐 Security
 
 Security is particularly important for systems handling operational and safety-related information.
